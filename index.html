@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>suhyouri</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+          "Helvetica Neue", Arial, sans-serif;
+        line-height: 1.6;
+        color: #fff;
+        background-color: #000;
+      }
+
+      :root {
+        --flash-x: 50vw;
+        --flash-y: 50vh;
+        --flash-radius: 140px;
+      }
+
+      /* Cursor flashlight overlay */
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        z-index: 9999;
+        background: radial-gradient(
+          circle at var(--flash-x) var(--flash-y),
+          rgba(0, 0, 0, 0) 0%,
+          rgba(0, 0, 0, 0) calc(var(--flash-radius) - 10px),
+          rgba(0, 0, 0, 0.96) var(--flash-radius),
+          rgba(0, 0, 0, 0.98) 100%
+        );
+      }
+
+      .container {
+        display: flex;
+        min-height: 100vh;
+      }
+
+      /* Sidebar */
+      .sidebar {
+        width: 200px;
+        padding: 30px 20px;
+        border-right: 1px solid #ddd;
+        position: fixed;
+        height: 100vh;
+        overflow-y: auto;
+      }
+
+      .sidebar h1 {
+        font-size: 16px;
+        font-weight: 600;
+        margin-bottom: 15px;
+      }
+
+      .sidebar .social {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 30px;
+        font-size: 14px;
+      }
+
+      .sidebar .social svg {
+        width: 20px;
+        height: 20px;
+      }
+
+      .sidebar nav ul {
+        list-style: none;
+      }
+
+      .sidebar nav ul li {
+        margin-bottom: 12px;
+      }
+
+      .sidebar nav ul li a {
+        color: #666;
+        text-decoration: none;
+        font-size: 14px;
+        transition: color 0.2s;
+      }
+
+      .sidebar nav ul li a:hover {
+        color: #000;
+      }
+
+      /* Main Content */
+      .main-content {
+        margin-left: 200px;
+        flex: 1;
+        padding: 30px 40px;
+      }
+
+      .artwork {
+        margin-bottom: 60px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+        align-items: start;
+      }
+
+      .artwork-info h2 {
+        font-size: 18px;
+        font-weight: 600;
+        font-style: italic;
+        margin-bottom: 8px;
+      }
+
+      .artwork-info .details {
+        font-size: 14px;
+        color: #333;
+        margin-bottom: 8px;
+      }
+
+      .artwork-info .video-duration {
+        font-size: 14px;
+        color: #666;
+        margin-bottom: 20px;
+      }
+
+      .artwork-info p {
+        font-size: 15px;
+        margin-bottom: 15px;
+        font-style: italic;
+        color: #333;
+      }
+
+      .artwork-info .description {
+        font-size: 15px;
+        line-height: 1.7;
+        margin-bottom: 15px;
+        font-style: normal;
+      }
+
+      .artwork-info .commission {
+        font-size: 14px;
+        color: #666;
+        margin-top: 20px;
+      }
+
+      .artwork-media {
+        position: relative;
+      }
+
+      .artwork-media video,
+      .artwork-media img {
+        width: 100%;
+        height: auto;
+        display: block;
+      }
+
+      /* Responsive */
+      @media (max-width: 1024px) {
+        .sidebar {
+          width: 180px;
+        }
+
+        .main-content {
+          margin-left: 180px;
+        }
+
+        .artwork {
+          gap: 30px;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .container {
+          flex-direction: column;
+        }
+
+        .sidebar {
+          width: 100%;
+          position: relative;
+          height: auto;
+          border-right: none;
+          border-bottom: 1px solid #ddd;
+        }
+
+        .main-content {
+          margin-left: 0;
+          padding: 20px;
+        }
+
+        .artwork {
+          grid-template-columns: 1fr;
+          gap: 20px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <h1>suhyouri</h1>
+        <div class="social">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+          </svg>
+          <span>instagram</span>
+        </div>
+        <nav>
+          <ul>
+            <li><a href="#about">About</a></li>
+          </ul>
+        </nav>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="main-content">
+        <!-- Artwork 1: Tricks & Tracks -->
+        <article class="artwork">
+          <div class="artwork-info">
+            <h2>Tricks & Tracks, 2025,</h2>
+            <div class="details">5 × 5,5 × 2,5m</div>
+            <div class="details">Wood, cardboard, electronics, motors</div>
+            <div class="video-duration">7:11 min video.</div>
+
+            <p>From ruses to rails, from clever tricks to fleeting images.</p>
+
+            <div class="description">
+              Once forbidden, "photophony"—the art of photographing with a
+              phone—has become part of the museum landscape. Screens multiply,
+              selfies fill the space, and artworks circulate long before they
+              are truly seen.
+            </div>
+
+            <div class="description">
+              With <em>Tricks & Tracks</em>, we embrace this paradox. The
+              installation is designed for the phone itself: it is the visitor,
+              the explorer, the storyteller. What you discover is a backstage
+              world of makeshift illusions, miniature theaters, and playful
+              devices. Against the tide of AI-generated images, we reclaim the
+              magic of the physical: the ingenuity of tricks, their fragile
+              materiality, and the earliest enchantments of theater and cinema.
+            </div>
+
+            <div class="commission">Commissioned by Le Bel Ordinaire Pau.</div>
+          </div>
+          <div class="artwork-media">
+            <video controls poster="">
+              <source src="assets/video.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+          </div>
+        </article>
+
+        <!-- Artwork 2: Panneau Panache -->
+        <article class="artwork">
+          <div class="artwork-info">
+            <h2>Panneau Panache, 2025</h2>
+            <div class="details">Woods, ropes, pulleys</div>
+            <div class="details">(4×4×2m)</div>
+
+            <div class="description">
+              Through a pulley system echoing the visual effects of early
+              stagecraft, a dozen colorful shapes—suspended as though sprouting
+              from the greenery—spring magically to life. With each gesture of
+              the passerby they intertwine or overlap, the walker becoming the
+              puppeteer of fleeting scenes revealed to all onlookers.
+            </div>
+
+            <div class="commission">Commissioned by the the Château de</div>
+          </div>
+          <div class="artwork-media">
+            <img src="assets/img1.jpeg" alt="Panneau Panache installation" />
+          </div>
+        </article>
+
+        <!-- Artwork 3: Dummy -->
+        <article class="artwork">
+          <div class="artwork-info">
+            <h2>Untitled Work, 2025</h2>
+            <div class="details">Mixed media</div>
+            <div class="details">Variable dimensions</div>
+
+            <div class="description">
+              이 작품은 더미 텍스트로 채워진 예시 항목입니다. 실제 콘텐츠로
+              교체하여 사용하세요.
+            </div>
+
+            <div class="commission">Courtesy of the artist.</div>
+          </div>
+          <div class="artwork-media">
+            <img
+              src="assets/img1.jpeg"
+              alt="Placeholder media for Untitled Work"
+            />
+          </div>
+        </article>
+
+        <!-- Artwork 4: Dummy -->
+        <article class="artwork">
+          <div class="artwork-info">
+            <h2>Study in Motion, 2025</h2>
+            <div class="details">Cardboard, wood, motors</div>
+            <div class="details">Approx. 2 × 2 × 1m</div>
+
+            <div class="description">
+              전시 설명 더미 텍스트입니다. 프로젝트 개요, 재료, 의도 등을 간단히
+              적어 넣을 수 있습니다.
+            </div>
+
+            <div class="commission">Private collection.</div>
+          </div>
+          <div class="artwork-media">
+            <img
+              src="assets/img1.jpeg"
+              alt="Placeholder media for Study in Motion"
+            />
+          </div>
+        </article>
+      </main>
+    </div>
+    <script>
+      (function () {
+        function updateFlashlight(x, y) {
+          document.documentElement.style.setProperty("--flash-x", x + "px");
+          document.documentElement.style.setProperty("--flash-y", y + "px");
+        }
+
+        window.addEventListener(
+          "mousemove",
+          function (e) {
+            updateFlashlight(e.clientX, e.clientY);
+          },
+          { passive: true }
+        );
+
+        window.addEventListener(
+          "touchmove",
+          function (e) {
+            if (e.touches && e.touches[0]) {
+              updateFlashlight(e.touches[0].clientX, e.touches[0].clientY);
+            }
+          },
+          { passive: true }
+        );
+      })();
+    </script>
+  </body>
+</html>
