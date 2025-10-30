@@ -256,7 +256,13 @@
             <div class="commission">Commissioned by Le Bel Ordinaire Pau.</div>
           </div>
           <div class="artwork-media">
-            <video controls poster="">
+            <video
+              poster="assets/img1.jpeg"
+              muted
+              playsinline
+              loop
+              preload="metadata"
+            >
               <source src="assets/video.mp4" type="video/mp4" />
               Your browser does not support the video tag.
             </video>
@@ -350,6 +356,51 @@
           function (e) {
             if (e.touches && e.touches[0]) {
               updateFlashlight(e.touches[0].clientX, e.touches[0].clientY);
+            }
+          },
+          { passive: true }
+        );
+      })();
+    </script>
+    <script>
+      (function () {
+        var firstVideo = document.querySelector(
+          ".artwork .artwork-media video"
+        );
+        if (!firstVideo) return;
+
+        function playPreview() {
+          firstVideo.currentTime = 0;
+          var playPromise = firstVideo.play();
+          if (playPromise && typeof playPromise.catch === "function") {
+            playPromise.catch(function () {});
+          }
+        }
+
+        function stopPreview() {
+          firstVideo.pause();
+          firstVideo.currentTime = 0;
+        }
+
+        firstVideo.addEventListener("mouseenter", playPreview);
+        firstVideo.addEventListener("mouseleave", stopPreview);
+        firstVideo.addEventListener("focus", playPreview);
+        firstVideo.addEventListener("blur", stopPreview);
+
+        // Touch support: tap to play, tap outside to stop
+        firstVideo.addEventListener(
+          "touchstart",
+          function () {
+            playPreview();
+          },
+          { passive: true }
+        );
+
+        document.addEventListener(
+          "touchend",
+          function (e) {
+            if (!firstVideo.contains(e.target)) {
+              stopPreview();
             }
           },
           { passive: true }
